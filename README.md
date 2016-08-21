@@ -122,3 +122,13 @@ tar -xf ../mpc-1.0.3.tar.gz
 mv -v mpc-1.0.3 mpc
 ```
 然后再继续按照说明来，终于可以编译成功了。
+
+###Linux-4.4.2 API Headers
+两条命令，别忘记进入linux-4.4.2目录
+
+###Glibc-2.23
+大坑一个，gawk之前有说过要创建一个/usr/bin/awk链接指向它，但是安装gawk并没有将AWK加入到环境变量，导致配置文件找不到usr/bin/awk，从而找不到gawk。
+自己加上，注意AWK要大写，否则没用。/usr/bin/awk指向了/usr/local/bin/gawk-4.1.3
+```
+export AWK=/usr/bin/awk
+```
