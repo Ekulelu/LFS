@@ -24,10 +24,15 @@ nano /etc/fstab
 
 宿主机linux的系统需求，lfs需要宿主机安装了一些软件，但是Ubuntu的发行版本并不是所有都有。好在这些软件都可以在lfs的packages里面找到。所以建议先下载lfs的packages，下载点在官网的lfs的download页面下面的几个链接中。这里使用7.9systemd版本。
 Ubuntu缺的几个东西，请按照下面的顺序安装，因为有依赖关系。
-M4
-bison
-yacc是bison的硬链接
+
+M4，
+
+bison，
+
+yacc是bison的硬链接，
+
 gawk，
+
 安装完后需要调整3个链接
 /bin/sh -> /usr/bin/bash # 这里 sh 是到 bash 的硬链接
 yacc is bison (GNU Bison) 3.0.4 # yacc 是到 bison 的硬链接
