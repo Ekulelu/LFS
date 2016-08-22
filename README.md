@@ -233,3 +233,75 @@ chown -R root:root $LFS/tools
 到此，第五章工作结束，下面开始构建LFS系统。
 
 
+##第六章 建立LFS系统
+准备虚拟内核文件系统
+```
+mkdir -pv $LFS/{dev,proc,sys,run}
+```
+建立原始设备节点
+```
+mknod -m 600 $LFS/dev/console c 5 1
+mknod -m 666 $LFS/dev/null c 1 3
+```
+挂载设备
+```
+mount -v --bind /dev $LFS/dev
+```
+挂载文件系统
+```
+mount -vt devpts devpts $LFS/dev/pts -o gid=5,mode=620
+mount -vt proc proc $LFS/proc
+mount -vt sysfs sysfs $LFS/sys
+mount -vt tmpfs tmpfs $LFS/run
+```
+在某些宿主机系统里，/dev/shm 是一个指向 /run/shm 的软链接。这个 /run 下的 tmpfs 文件系统已经在之前挂载了，所以在这里只需要创建一个目录。
+```
+if [ -h $LFS/dev/shm ]; then
+  mkdir -pv $LFS/$(readlink $LFS/dev/shm)
+fi
+```
+进入chroot环境
+```
+chroot "$LFS" /tools/bin/env -i \
+HOME=/root \
+TERM="$TERM" \
+PS1='\u:\w\$ ' \
+PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin \
+/tools/bin/bash --login +h
+```
+这里会把/mnt/lfs作为根目录，也就没有了mnt/lfs/sources，/sources就是原来那个mnt/lfs/sources目录。
+
+建立文件目录
+```
+mkdir -pv /{bin,boot,etc/{opt,sysconfig},home,lib/firmware,mnt,opt}
+mkdir -pv /{media/{floppy,cdrom},sbin,srv,var}
+install -dv -m 0750 /root
+install -dv -m 1777 /tmp /var/tmp
+mkdir -pv /usr/{,local/}{bin,include,lib,sbin,src}
+mkdir -pv /usr/{,local/}share/{color,dict,doc,info,locale,man}
+mkdir -v /usr/{,local/}share/{misc,terminfo,zoneinfo}
+mkdir -v /usr/libexec
+mkdir -pv /usr/{,local/}share/man/man{1..8}
+case $(uname -m) in
+x86_64) ln -sv lib /lib64
+ln -sv lib /usr/lib64
+ln -sv lib /usr/local/lib64 ;;
+esac
+mkdir -v /var/{log,mail,spool}
+ln -sv /run /var/run
+ln -sv /run/lock /var/lock
+mkdir -pv /var/{opt,cache,lib/{color,misc,locate},local}
+```
+建立必要的文件和软连接
+```
+ln -sv /tools/bin/{bash,cat,echo,pwd,stty} /bin
+ln -sv /tools/bin/perl /usr/bin
+ln -sv /tools/lib/libgcc_s.so{,.1} /usr/lib
+ln -sv /tools/lib/libstdc++.so{,.6} /usr/lib
+sed 's/tools/usr/' /tools/lib/libstdc++.la > /usr/lib/libstdc++.la
+ln -sv bash /bin/sh
+```
+
+```
+ln -sv /proc/self/mounts /etc/mtab
+```
