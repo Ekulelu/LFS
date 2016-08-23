@@ -305,3 +305,61 @@ ln -sv bash /bin/sh
 ```
 ln -sv /proc/self/mounts /etc/mtab
 ```
+建立/etc/passwd和/etc/group，代码不贴了
+执行
+改变目录权限
+开始安装软件包
+
+###Linux-4.4.2 API Headers
+通过
+###Man-pages-4.04
+通过
+###Glibc-2.23
+有几个错误是会报错的
+
+###调整工具链
+
+###Zlib-1.2.8
+通过
+
+###File-5.25
+通过
+
+###Binutils-2.26
+check时候出错
+```
+Makefile:3546: recipe for target 'check-DEJAGNU' failed
+make[5]: *** [check-DEJAGNU] Error 1
+make[5]: Leaving directory '/sources/binutils-2.26/build/ld'
+Makefile:1866: recipe for target 'check-am' failed
+make[4]: *** [check-am] Error 2
+make[4]: Leaving directory '/sources/binutils-2.26/build/ld'
+Makefile:1713: recipe for target 'check-recursive' failed
+make[3]: *** [check-recursive] Error 1
+make[3]: Leaving directory '/sources/binutils-2.26/build/ld'
+Makefile:1868: recipe for target 'check' failed
+make[2]: *** [check] Error 2
+make[2]: Leaving directory '/sources/binutils-2.26/build/ld'
+Makefile:7211: recipe for target 'check-ld' failed
+make[1]: *** [check-ld] Error 2
+make[1]: Leaving directory '/sources/binutils-2.26/build'
+Makefile:2198: recipe for target 'do-check' failed
+make: *** [do-check] Error 2
+```
+不知道继续进行下去会不会有问题。继续下去。
+
+###GMP-6.1.0
+通过
+
+###MPFR-3.1.3
+通过
+
+###MPC-1.0.3
+通过
+
+###GCC-5.3.0
+
+
+
+
+
