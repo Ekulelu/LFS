@@ -358,8 +358,48 @@ make: *** [do-check] Error 2
 通过
 
 ###GCC-5.3.0
+这个也会报几个错，但是说明书上说是会报错的。具体的错误请参照
+[http://www.linuxfromscratch.org/lfs/build-logs/7.9/i7-5820K/test-logs/082-gcc-5.3.0]
 
+###Bzip2-1.0.6
+通过
 
+###Pkg-config-0.29
+通过
 
+###Ncurses-6.0
+通过
+
+###Attr-2.4.47
+通过
+
+###Acl-2.2.52
+通过
+
+###Libcap-2.25
+通过
+
+###Sed-4.2.2
+通过
+
+###Shadow-4.2.1
+通过，这个安装后要设定密码
+
+###Psmisc-22.21
+通过
+
+###Procps-ng-3.3.11
+通过
+
+###E2fsprogs-1.42.13
+通过
+
+###Iana-Etc-2.30
+通过
+
+###M4-1.4.17
+会报一个错误，test-update-copyright.sh，说明书上说可以忽略
+
+###
 
 
