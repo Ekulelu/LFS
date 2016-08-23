@@ -23,7 +23,7 @@ nano /etc/fstab
 这样就能在系统进入后自动挂载这个分区到/mnt/lfs
 
 宿主机linux的系统需求，lfs需要宿主机安装了一些软件，但是Ubuntu的发行版本并不是所有都有。好在这些软件都可以在lfs的packages里面找到。所以建议先下载lfs的packages，下载点在官网的lfs的download页面下面的几个链接中。这里使用7.9systemd版本。
-Ubuntu缺的几个东西，请按照下面的顺序安装，因为有依赖关系。
+Ubuntu缺的几个东西，请按照下面的顺序安装，因为有依赖关系。这些软件可以在7.9systemd的包里面找到，也可以在线安装。
 
 M4，
 
@@ -96,7 +96,7 @@ source ~/.bash_profile
 编译的时候可以用make -j2来指定编译时候所用的处理器个数。2代表2个。
 
 ##3、构建临时系统
-这部分对应的是教程的第五章
+这部分对应的是教程的第五章。编译的时候如果有make命令，请加上make -j8，使用多核编译。
 开始前最后确认几样东西，虽然说可能没设置也能编译过去，但是万一出问题了，那就很难找到源头所在，所以还是安装要求乖乖来。
 $LFS=/mnt/lfs
 shell 使用的是 bash。
@@ -234,6 +234,7 @@ chown -R root:root $LFS/tools
 
 
 ##第六章 建立LFS系统
+如果之前有建立make flag，进入到这个环境会没有用了。可以用make -j8指令。其他的check也要加上这个-j8，除了特殊说明的外
 准备虚拟内核文件系统
 ```
 mkdir -pv $LFS/{dev,proc,sys,run}
@@ -346,7 +347,7 @@ make[1]: Leaving directory '/sources/binutils-2.26/build'
 Makefile:2198: recipe for target 'do-check' failed
 make: *** [do-check] Error 2
 ```
-不知道继续进行下去会不会有问题。继续下去。
+不知道继续进行下去会不会有问题。继续下去。回去查了看官方的log，也是有这个错误。
 
 ###GMP-6.1.0
 通过
@@ -371,7 +372,7 @@ make: *** [do-check] Error 2
 通过
 
 ###Attr-2.4.47
-通过
+通过，这里有一处不能用多核编译的。
 
 ###Acl-2.2.52
 通过
@@ -400,6 +401,153 @@ make: *** [do-check] Error 2
 ###M4-1.4.17
 会报一个错误，test-update-copyright.sh，说明书上说可以忽略
 
+###Bison-3.0.4
+通过
+
+###Flex-2.6.0
+通过
+
+###Grep-2.23
+通过
+
+###Readline-6.3
+通过
+
+###Bash-4.3.30
+通过
+
+###Bc-1.06.95
+通过
+
+###Libtool-2.4.6
+check会有几个错误。但可以忽略
+
+###GDBM-1.11
+通过
+
+###Expat-2.1.0
+通过
+
+###Inetutils-1.9.4
+多核编译下貌似会出错。第二次没用多核编译通过了。
+
+###Perl-5.22.1
+通过
+
+###XML::Parser-2.44
+通过
+
+###Autoconf-2.69
+会报6个错，4个expected fails。其他两个错不管。
+
+###Automake-1.15
+通过，check特别慢
+
+###Coreutils-8.25
+通过
+
+###Diffutils-3.3
+test-update-copyright.sh这个会报错，不用管
+
+###Gawk-4.1.3
+通过
+
+###Findutils-4.6.0
+通过
+
+###Gettext-0.19.7
+检查9个报错，因为缺少依赖。不用理。
+
+###Intltool-0.51.0
+通过
+
+###Gperf-3.0.4
+通过
+
+###Groff-1.22.3
+说明书中的<paper_size>要改为A4
+```
+PAGE=A4 ./configure --prefix=/usr
+```
+多核编译出错，使用单核编译可以通过。
+
+
+###Xz-5.2.2
+通过
+
+###GRUB-2.02~beta2
+通过
+
+###Less-481
+通过
+
+###Gzip-1.6
+通过
+
+###IPRoute2-4.4.0
+通过
+
+###Kbd-2.0.3
+通过
+
+###Kmod-22
+通过
+
+###Libpipeline-1.4.1
+通过
+
+###Make-4.1
+通过
+
+###Patch-2.7.5
+通过
+
+###Sysklogd-1.5.1
+7.9的tar包中没有这个，需要自己用单独的链接下，文章开头有链接。通过。
+
+###Sysvinit-2.88dsf
+7.9的包里面也没这个，需要下载它和它的补丁。补丁那个链接用IE打开才能下载，chrome会直接变为打开。
+通过
+
+###Tar-1.28
+通过
+
+###Texinfo-6.1
+通过
+
+###Eudev-3.1.5
+也是没有，另外下。这里还会缺少另外一个包udev-lfs-20140408.tar.bz2。
+通过
+
+###Util-linux-2.27.1
+通过
+
+###Man-DB-2.7.5
+通过
+
+###Vim-7.4
+通过
+
 ###
 
 
+###
+
+###
+
+
+###
+
+###
+
+###
+
+###
+
+###
+
+###
+
+###
+
+###
