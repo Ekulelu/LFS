@@ -558,5 +558,9 @@ Generic Driver Options --->
 把Device Drivers-->SCSI device support-->SCSI low-level drivers下的所有设置成未选择状态 
 Device Drivers-->Fusion MPT device support-->Fusion MPT(base + ScsiHost) drivers选中 
 ```
-终于可以启动了！但是键盘有点问题。识别的不一样。
+终于可以启动了！但是键盘有点问题。识别的不一样，应该是keymap没设置好。
 不过可以看到bash界面感动死了！！！！！！
+重写了/etc/sysconfig/console文件，将keymap改为了us，正常了。
+
+LFS到此先结束。还有其他课程赶着！
+
