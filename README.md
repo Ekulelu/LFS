@@ -528,26 +528,19 @@ PAGE=A4 ./configure --prefix=/usr
 ###Vim-7.4
 通过
 
-###
+清除其他东西。
+至此，完成第六章。
 
+##第七章配置参数
+这里需要配置时间，bash等等
 
-###
-
-###
-
-
-###
-
-###
-
-###
-
-###
-
-###
-
-###
-
-###
-
-###
+##第八章编译Linux内核和配置grub
+这里grub千万不要配置错了，否则进不去系统。
+第一次配置错了，进入系统的时候报filesystem找不到。后面得进入grup页面修改启动配置，开机按C键进入，然后输入下面代码，....代表按tab键补全。
+```
+set root=(hd0,msdos1)
+linux /boot/vm.... ro root=/dev/sda1
+initrb /ini...img
+boot
+```
+然后可以读入lfs系统，但是又报VFS:Unable to mount root fs on unknown block。
