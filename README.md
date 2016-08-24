@@ -544,3 +544,19 @@ initrb /ini...img
 boot
 ```
 然后可以读入lfs系统，但是又报VFS:Unable to mount root fs on unknown block。
+
+找了7.7版本里面的Linux内核去编译，但是这次开机就报错。
+
+后面网上找到了办法：
+```
+1、书中的
+Device Drivers --->
+Generic Driver Options --->
+[ ] Support for uevent helper [CONFIG_UEVENT_HELPER]
+[*] Maintain a devtmpfs filesystem to mount at /dev [CONFIG_DEVTMPFS]
+2、
+把Device Drivers-->SCSI device support-->SCSI low-level drivers下的所有设置成未选择状态 
+Device Drivers-->Fusion MPT device support-->Fusion MPT(base + ScsiHost) drivers选中 
+```
+终于可以启动了！但是键盘有点问题。识别的不一样。
+不过可以看到bash界面感动死了！！！！！！
